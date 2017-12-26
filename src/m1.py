@@ -4,8 +4,8 @@ A problem in which to practice:
   -- using SEQUENCES
 
 Authors: Valerie Galluzzi, David Mutchler, Dave Fisher, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Charles Nourse.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 import random
@@ -92,7 +92,7 @@ class CircleChanger(object):
         # --------------------------------------------------------------
 
         ################################################################
-        # TODO: 2.
+        # DONE: 2.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_init   function (below).
         #   Third, implement and test this method.
@@ -101,6 +101,11 @@ class CircleChanger(object):
         # the SPECIFICATION of the method.  That is why you read the
         # TEST function before implementing the method that it tests.
         ################################################################
+        self.center = rg.Point(x, y)
+        self.circle = rg.Circle(self.center, radius)
+        self.circle.fill_color = fill_color
+        self.colors = colors
+        self.radius = radius
 
     def __repr__(self):
         """
@@ -192,7 +197,7 @@ class CircleChanger(object):
             :type point: rg.Point
         """
         ################################################################
-        # TODO: 3.
+        # DONE: 3.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_get_distance_from   function
         #   (below).  Third, implement and test this method.
@@ -201,6 +206,8 @@ class CircleChanger(object):
         #   of the    rg.Point     class to compute this distance.
         #   NO CREDIT if you use the distance formula here.
         ################################################################
+        d = point.get_distance_from(self.center)
+        return d
 
     def swell_or_shrink_once(self, amount_to_swell_or_shrink):
         """
@@ -265,6 +272,15 @@ class CircleChanger(object):
         #   Simply   ** ASK FOR HELP **
         #            if this does not make sense to you.
         ################################################################
+        r = self.circle.radius
+        if r + amount_to_swell_or_shrink >= 1:
+            r += amount_to_swell_or_shrink
+        else:
+            r = 1
+
+        self.circle.outline_thickness = random.randrange(3, 16)
+        index = random.randrange(0, len(self.colors))
+        self.circle.fill_color = self.colors[index]
 
     def swell_or_shrink_repeatedly(self,
                                    amount_to_swell_or_shrink,
